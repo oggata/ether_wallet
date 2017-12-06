@@ -1,0 +1,46 @@
+<% include header %>
+
+  <script language="javascript" type="text/javascript">
+        function OnButtonClick() {
+            var xhr = new XMLHttpRequest();
+            //xhr.timeout=1000;
+            var host = window.location.hostname;
+            var port = window.location.port;
+            var url = "http://" + host + ":" + port + "/api/user/create?name=aaa";
+            xhr.open('GET', url);
+            xhr.onload = function (e) {
+                if (this.status == 200) {
+                    var json = JSON.parse(this.responseText);
+                    if(json.status == "logout"){
+                        location.href='/login';
+                        return;
+                    }
+                    if(json.status == "ok"){
+                      //alert("あなたのウォレットアドレスは「" + json.wallet_address + "」です。暗唱キーは「" + json.wallet_mnemonic + "」です。キーは手元にメモして保管してください。");
+                      alert("あなたのウォレットアドレスは「" + json.wallet_address + "」です。");
+                      location.href='/';
+                    }else{
+                      alert(json.message);
+                      location.href='/';
+                    }
+                }
+            };
+            xhr.send();
+        }
+  </script>
+
+  <body>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
+    <div class="container text-center">
+        <h2 class="form-signin-heading">Create New Account</h2>
+    <small class="text-muted">新しくアカウントを作成します。<br>(作成後にEthereumを管理できるようになります.)</small>
+    <p>
+    <br>
+    <input class="fa" type="button" value="Exec" onclick="OnButtonClick();"/><br />
+    </p>
+
+
+
+  </body>
+</html>
