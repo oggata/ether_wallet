@@ -74,7 +74,7 @@
             if(Number(_coinBalanceLabel.innerHTML) > 1){
                 location.href='/html5/index.html';
             }else{
-                alert("coin残高が不足しています.");
+                alert("Coin balance is insufficient.");
             } 
         }
 
@@ -121,7 +121,7 @@
                             return;
                         } else {
                             console.log( 'Failed. HttpStatus: '+xhr.statusText );
-                            alert("購入に失敗しました.");
+                            alert("Purchase failed.");
                         }
                         break;
                 
@@ -241,13 +241,15 @@
         </div>
       </div>
     </nav>
-    <div class="jumbotron" style="height:300;background:url('/images/top.png');background-size:cover;" >
-      <div class="container" style="height: 300px;">    
-        <h1>EtherPlanets</h1>
-        <p>search planets game</p>
-        <button class="btn btn-success btn-circle" type="submit" onclick="goToGameLayer()">Play</button>
+
+    <div class="jumbotron" style="background:url('/images/top.png');background-size:cover;">
+      <div class="container">
+        <h1 class="display-3">EtherPlanets</h1>
+        <p>This is a prototype game using ethereum.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button" onclick="goToGameLayer()">Play Game &raquo;</a></p>
       </div>
     </div>
+
     <div class="wrapper">
 	<br />
         <div class="container">
@@ -258,7 +260,7 @@
                         <div class="text">
                             <var id="wallet_balance">0
                             </var>
-                            <label class="text-muted">ethereum</label>
+                            <label class="text-muted">Ethereum</label>
                         </div>
 
                     </div>
@@ -270,7 +272,7 @@
                             <var id="coin_balance">0
                             </var>
 
-                            <label class="text-muted">game coin</label>
+                            <label class="text-muted">GameCoin</label>
                         </div>
 
                     </div>
@@ -283,7 +285,7 @@
                             <var id="game_score">0
                             </var>
 
-                            <label class="text-muted">MaxScore</label>
+                            <label class="text-muted">Score</label>
                         </div>
 
                     </div>
@@ -296,9 +298,8 @@
 			<div class="container">
 			<h2 class="form-signin-heading">WalletAddress</h2><hr>
 			<small class="text-muted">
-				このアドレスにゲームに使用する分のEthereumを送金してください.<br>
-				入金した金額はβではゲームコインに換金する以外に使用用途がない為、<br>
-				高額な入金はしないでください。<br>
+                Please send ethereum you want to exchange GameCoin.<br>
+                This game is prototype and you can't send ethereum to other address.
 			</small>
             <div class="container">
                 <form>
@@ -314,8 +315,8 @@
 
 			<h2 class="form-signin-heading">BUY GAME COIN</h2>
 			<small class="text-muted">
-				手持ちのEthereumをゲーム専用のコインに変換することができます.<br>
-				(このゲームコインは、Ethereumに戻すことはできません)
+				Please send ethereum you want to exchange game coin.<br>
+                This game is prototype and you can't send ethereum that you sent to other address.
 			</small>
 
             <div class="row">
@@ -398,8 +399,8 @@
                 <div class="col-md-3 text-right">
                     <div class="content">
                         <div class="pull-middle">
-                            <h4><strong>未知の惑星を発見する</strong></h4>
-                            <p>プレイヤーが見つけた惑星はトークンとして管理され、ブロックチェーン上に管理されます。発見したレアな惑星同士を友達同士で交換することもできます。</p>
+                            <h4><strong>Discover an unknown planet</strong></h4>
+                            <p>The planet found by the player is managed as a token and managed on the block chain. You can exchange rare planets you discover with each other.</p>
 
                         </div>
                     </div>
@@ -412,9 +413,10 @@
                 <div class="col-md-3 col-md-offset-1">
                     <div class="content">
                         <div class="pull-middle">
-                            <h4><strong>より遠くの星を探しに</strong></h4>
-                            <p>ゲームを遊び、宇宙船を強化することで、より長距離の探索が可能になります。宇宙の果てにある惑星を探す旅に出ましょう</p>
-                            <button class="btn btn-success btn-circle" type="submit" onclick="goToGameLayer()">Play</button>
+                            <h4><strong>Looking for farther stars</strong></h4>
+                            <p>By playing the game and strengthening the spacecraft, you will be able to explore longer distances. Let's go on a journey to find the planet at the end of the universe
+</p>
+                            <button class="btn btn-success btn-circle" type="submit" onclick="goToGameLayer()">Play Game</button>
                         </div>
                     </div>
                 </div>

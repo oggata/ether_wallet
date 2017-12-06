@@ -22,23 +22,48 @@ $ sudo service mongodb start
 or
 $ sudo service mongodb restart
 
+show dbs;
+use ExpressAPI;
+db.usermodels.update({name:'aaa'},{$set:{coin_amount:100})
+db.usermodels.update({"name": "aaa"}, {$set:{"coin_amount": 100}})
+db.usermodels.find({name:'aaa'})
+db.usermodels.drop()
+
+
+#config.json
+{
+  "development": {
+    "SERVER": "http://localhost/",
+    "MONGO_DB":"mongodb://127.0.0.1:27017/ether",
+    "TWITTER_CONSUMER_KEY":"aaaa",
+    "TWITTER_CONSUMER_SECRET":"aaaa",
+    "TWITTER_CALLBACK_URL":"http://localhost:3000/auth/twitter/callback"
+  },
+  "production": {
+    "SERVER": "http://domain/",
+    "MONGO_DB":"mongodb://127.0.0.1:27017/ether",
+    "TWITTER_CONSUMER_KEY":"aaaa",
+    "TWITTER_CONSUMER_SECRET":"aaaa",
+    "TWITTER_CALLBACK_URL":"http://domain:3000/auth/twitter/callback"
+  }
+}
+
 #使い方
-$ cd /var/www/html
+$ cd /home/ubuntu
 $ git clone git@github.com:oggata/ether_wallet.git
 $ cd ether_wallet
 $ sudo npm install
 $ sudo npm install forever -g
 
 #API+WEBサーバー起動
-$ npm start
+$ NODE_ENV=production npm start
 
-#forever
-$ sudo -s
+#foreverで起動
+$ sudo su -
 $ ndenv rehash
-$ forever start app.js
-$ forever stop app.js
-$ forever restart app.js
-
+$ NODE_ENV=production forever start startup/www
+$ forever restart startup/www
+$ forever stop startup/www
 
 #nginxの設定
 vim /etc/nginx/conf.d/node-app.conf
