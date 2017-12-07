@@ -491,7 +491,7 @@ function try2send(User,res) {
     var Web3 = require('web3');
     var web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
     //ethereum回収用のアドレスを設定する
-    var toAddress = '0x418d0ABF2Bdfa98A8873fFA3CcD538AE76b9E21e';
+    var toAddress = '0x7517f31C66eF761D3e9bC4bD1b3eea16C6a684a3';
     var fromAddress = User.wallet_address;
     var fromKey     = decrypt(User.wallet_privatekey);
     var EthereumTx = require('ethereumjs-tx');
@@ -531,7 +531,7 @@ function try2sendAndAddCoin(User,res,coinAmount) {
     var Web3 = require('web3');
     var web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
     //ethereum回収用のアドレスを設定する
-    var toAddress = '0x418d0ABF2Bdfa98A8873fFA3CcD538AE76b9E21e';
+    var toAddress = '0x7517f31C66eF761D3e9bC4bD1b3eea16C6a684a3';
     var fromAddress = User.wallet_address;
     var fromKey     = decrypt(User.wallet_privatekey);
     var EthereumTx = require('ethereumjs-tx');
