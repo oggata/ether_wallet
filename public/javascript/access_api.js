@@ -69,7 +69,7 @@ window.onload = function () {
 }
 
 function goToGameLayer() {
-console.log("login");
+  //console.log("login");
   if (window.location.pathname == "/") {
     var _coinBalanceLabel = document.getElementById('coin_balance');
     if (Number(_coinBalanceLabel.innerHTML) > 1) {
@@ -80,8 +80,6 @@ console.log("login");
   }else{
     alert("Please login");
   }
-
-
 }
 
 function OnButtonClick() {
