@@ -16,8 +16,8 @@
                         return;
                     }
                     if(json.status == "ok"){
-                      //alert("あなたのウォレットアドレスは「" + json.wallet_address + "」です。暗唱キーは「" + json.wallet_mnemonic + "」です。キーは手元にメモして保管してください。");
-                      alert("あなたのウォレットアドレスは「" + json.wallet_address + "」です。");
+                      //alert("Your address is「" + json.wallet_address + "」。Kye is「" + json.wallet_mnemonic + "」");
+                      alert("Your address is「" + json.wallet_address + "」");
                       location.href='/';
                     }else{
                       alert(json.message);
@@ -34,7 +34,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <div class="container text-center">
         <h2 class="form-signin-heading">Create New Account</h2>
-    <small class="text-muted">新しくアカウントを作成します。<br>(作成後にEthereumを管理できるようになります.)</small>
+    <small class="text-muted">Create New Account<br></small>
     <p>
     <br>
     <input class="fa" type="button" value="Exec" onclick="OnButtonClick();"/><br />
