@@ -535,6 +535,17 @@ function try2sendAndAddCoin(User,res,coinAmount) {
     var fromAddress = User.wallet_address;
     var fromKey     = decrypt(User.wallet_privatekey);
     var EthereumTx = require('ethereumjs-tx');
+    var value = 0.0001;
+    if(coinAmount == 10){
+        etherValue = 0.001;
+    }
+    if(coinAmount == 100){
+        etherValue = 0.01;
+    }
+    if(coinAmount == 1000){
+        etherValue = 0.1;
+    }
+
     //transaction
     web3.eth.getTransactionCount(fromAddress).then(txCount => {
         console.log("nonce:" + txCount);
@@ -543,8 +554,8 @@ function try2sendAndAddCoin(User,res,coinAmount) {
             gasPrice: web3.utils.toHex(web3.utils.toWei('0.00000009', 'ether')),
             gasLimit: web3.utils.toHex(30000),
             to: toAddress,
-            value: web3.utils.numberToHex(web3.utils.toWei('0.0001', 'ether')),
-            data: web3.utils.asciiToHex('hello'),
+            value: web3.utils.numberToHex(web3.utils.toWei(etherValue, 'ether')),
+            data: web3.utils.asciiToHex('etherplanets'),
             //chainId: 1
         }
         sendSigned(txData, fromKey, function (err, result) {
