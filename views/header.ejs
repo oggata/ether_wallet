@@ -4,197 +4,14 @@
     <meta charset="utf-8">
     <meta name="robots" content="noindex, nofollow">
     <title>EtherPlanets</title>
+    <script type="text/javascript" src="/javascript/access_api.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <style type="text/css">
-
-@import url(http://weloveiconfonts.com/api/?family=brandico|entypo|openwebicons|zocial);
-
-.form-signin{
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-
-
-.login-input {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.login-input-pass {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-
-.signup-input {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.signup-input-confirm {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-
-
-.create-account {
-  text-align: center;
-  width: 100%;
-  display: block;
-}
-
-.form-signin .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.btn-center{
-  width: 50%;
-  text-align: center;
-  margin: inherit;
-}
-
-.social-login-btn {
-  margin: 5px;
-  width: 20%;
-  font-size: 250%;
-  padding: 0;
-}
-
-.social-login-more {
-  width: 45%;
-}
-
-.social-google {
-  background-color: #da573b;
-  border-color: #be5238;
-}
-.social-google:hover{
-  background-color: #be5238;
-  border-color: #9b4631;
-}
-
-.social-twitter {
-  background-color: #1daee3;
-  border-color: #3997ba;
-}
-.social-twitter:hover {
-  background-color: #3997ba;
-  border-color: #347b95;
-}
-
-.social-facebook {
-  background-color: #4c699e;
-  border-color: #47618d;
-}
-.social-facebook:hover {
-  background-color: #47618d;
-  border-color: #3c5173;
-}
-
-.social-linkedin {
-  background-color: #4875B4;
-  border-color: #466b99;
-}
-.social-linkedin:hover {
-  background-color: #466b99;
-  border-color: #3b5a7c;
-}
-
-
-        .hero-widget { text-align: center; padding-top: 60px; padding-bottom: 100px; height:250px;}
-        .hero-widget .icon { display: block; font-size: 96px; line-height: 96px; margin-bottom: 10px; text-align: center; }
-        .hero-widget var { display: block; height: 64px; font-size: 64px; line-height: 64px; font-style: normal; }
-        .hero-widget label { font-size: 30px; }
-        .hero-widget .options { margin-top: 140px; }
-
-        .mt-100 {
-            margin-top: 100px; 
-        }
-        .mb-100 {
-            margin-bottom: 100px;
-        }
-
-        .icon {
-            width: 32px;
-            height: 32px;
-            text-align: center;
-            padding: 7px 8px;
-            border: 2px solid;
-            border-radius: 50%;
-        }
-
-        .header {
-            padding-top: 50px;
-            background-color: #eee;
-            overflow: hidden;
-            height:50px;
-        }
-
-        .footer {
-            color: #887;
-            background-color: #eee;
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
-
-        .content {
-            position: relative;
-            display: table;
-            width: 100%;
-            min-height: 100vh;
-        }
-        .pull-middle {
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        .btn {
-            padding-left: 25px;
-            padding-right: 25px;
-        }
-        .btn-circle {
-            border-radius: 20px;
-        }
-
-        .input-group input {
-            border: 0;
-            box-shadow: none;
-            padding-right: 30px;
-        }
-        .input-group input:focus,
-        .input-group input:active {
-            outline: 0;
-            box-shadow: none;
-        }
-        .input-group-btn:last-child>.btn {
-            z-index: 2;
-            margin-left: -18px;   
-            border-radius: 20px;
-        }
-
-        .phone {
-            position: relative;
-            max-width: 263px;
-            margin: 0 auto;
-            padding: 65px 15px 55px;
-            border: 2px solid #ddd;
-            border-radius: 20px;
-            background-color: #222;
-            box-shadow: 20px 20px 40px #887;
-        }
+    @import url(http://weloveiconfonts.com/api/?family=brandico|entypo|openwebicons|zocial);
     </style>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
@@ -208,13 +25,22 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand text-uppercase" href="#">Ether Planets  <span class="label label-success text-capitalize">Free</span></a>
+          <a class="navbar-brand text-uppercase" href="#">Ether Planets  <span class="label label-success text-capitalize">Ethereum</span></a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="navigation">
-        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="hidden">
+                <a href="#page-top"></a>
+            </li>
+            <li class="page-scroll">
+                <a href="#portfolio">Portfolio</a>
+            </li>
+            <li class="page-scroll">
+                <a href="#about">About</a>
+            </li>
+            <li class="page-scroll">
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
       </div>
     </nav>
-    <header class="header">
-    </header>
 

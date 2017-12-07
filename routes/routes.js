@@ -585,8 +585,10 @@ function try2sendAndAddCoin(User,res,coinAmount) {
     })
 }
 
-app.get('/game', function(req, res) {
-    res.redirect("/index.html");
+app.get('/', function(req, res) {
+  res.render('top', {
+    title: 'top'
+  });
 });
 
 app.get('/login', function(req, res) {
@@ -616,7 +618,7 @@ app.get("/auth/twitter", passport.authenticate("twitter"));
 // authentication has failed.
 app.get("/auth/twitter/callback",
     passport.authenticate("twitter", {
-        successRedirect: "/index.html",
+        successRedirect: "/",
         failureRedirect: "/"
     }));
 

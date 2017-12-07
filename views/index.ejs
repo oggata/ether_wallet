@@ -1,61 +1,42 @@
 <% include header %>
+<% include jumbotron %>
 
-
-
-
-    <div class="jumbotron" style="height:300;background:url('/images/top.png');background-size:cover;" >
-      <div class="container" style="height: 300px;">    
-      </div>
-    </div>
-
-
-
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
-		<div class="container text-center">
-        <h2 class="form-signin-heading">Sign in</h2>
-		<small class="text-muted">TwitterLogin<br>(There is no automatic posting to Twitter)</small>
-		<p>
-		<a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
-		</p>
-
-
+<div class="container text-center">
+<h2 class="form-signin-heading">Sign in</h2>
+<small class="text-muted">TwitterLogin<br>(There is no automatic posting to Twitter)</small>
+<p>
+<a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
+</p>
+</div>
 
 <section class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 text-right">
-                    <div class="content">
-                        <div class="pull-middle">
-                            <h4><strong>Discover an unknown planet</strong></h4>
-                            <p>The planet found by the player is managed as a token and managed on the block chain. You can exchange rare planets you discover with each other.</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 text-right">
+                <div class="content">
+                    <div class="pull-middle">
+                        <h4><strong>Discover an unknown planet</strong></h4>
+                        <p>The planet found by the player is managed as a token and managed on the block chain. You can exchange rare planets you discover with each other.</p>
 
-                        </div>
                     </div>
                 </div>
-               <div class="col-md-4 col-md-offset-1 mt-100 mb-100">
-                    <div class="phone">
-                        <img class="img-responsive img-rounded" src="./images/sc1.png">
-                    </div>
+            </div>
+           <div class="col-md-4 col-md-offset-1 mt-100 mb-100">
+                <div class="phone">
+                    <img class="img-responsive img-rounded" src="./images/sc1.png">
                 </div>
-                <div class="col-md-3 col-md-offset-1">
-                    <div class="content">
-                        <div class="pull-middle">
-                            <h4><strong>Looking for farther stars</strong></h4>
-                            <p>By playing the game and strengthening the spacecraft, you will be able to explore longer distances. Let's go on a journey to find the planet at the end of the universe
-</p>
-                            <button class="btn btn-success btn-circle" type="submit" onclick="goToGameLayer()">Play Game</button>
-                        </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                <div class="content">
+                    <div class="pull-middle">
+                        <h4><strong>Looking for farther stars</strong></h4>
+                        <p>By playing the game and strengthening the spacecraft, you will be able to explore longer distances. Let's go on a journey to find the planet at the end of the universe
+                        </p>
+                        <button class="btn btn-success btn-circle" type="submit" onclick="goToGameLayer()">Play Game</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <footer class="footer text-center">
-        <div class="container">
-            <small>© Copyright 2017. Crafted with oggata</small>
-        </div>
-    </footer>
-
-
-  </body>
-</html>
+    </div>
+</section>
+<% include footer %>
