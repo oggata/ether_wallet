@@ -16,7 +16,6 @@
     <meta property="og:url" content="http://etherplanets.com">
     <meta property="og:description" content="This is a prototype game using ethereum.">
     <meta property="og:site_name" content="EtherPlanets (β)">
-    <script type="text/javascript" src="/javascript/access_api.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -25,6 +24,16 @@
     </style>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
     <meta property="og:image" content="http://mattn.kaoriya.net/images/logo.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.5.4/src/loadingoverlay.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        console.log("overlay");
+        //$.LoadingOverlay("show");
+    });
+    </script>
+    <script type="text/javascript" src="/javascript/access_api.js"></script>
+
 </head>
 <body>
     <div class="wrapper">

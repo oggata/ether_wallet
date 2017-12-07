@@ -2,9 +2,20 @@ var app = module.parent.exports;
 var passport = app.get("passport");
 var crypto = require("crypto");
 var UserModel = require('../models/userModel.js');
+var fs = require('fs');
+var util = require('util');
+var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) {
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
 
 //curl 'http://localhost:3000/api/user/test' -XGET
 app.get('/api/user/test', function (req, res) {
+
+   //app.use(morgan({ stream: "aaa" }));
     if(req.session.passport.user) {
         console.log(req.session.passport.user.id);
     }else{
@@ -235,7 +246,6 @@ app.get('/api/user/pay',function(req,res){
 //curl 'http://localhost:3000/api/user/buy?amount=10' -XGET
 app.get('/api/user/buy',function(req,res){
     console.log("buy");
-
     if(req.session.passport.user) {
         console.log(req.session.passport.user.id);
     }else{
@@ -266,8 +276,7 @@ app.get('/api/user/buy',function(req,res){
                 });
             }
             User = user[0];
-
-            try2sendAndAddCoin(User,res,10);
+            try2sendAndAddCoin(User,res,amount);
         }
     );
 });
@@ -535,7 +544,7 @@ function try2sendAndAddCoin(User,res,coinAmount) {
     var fromAddress = User.wallet_address;
     var fromKey     = decrypt(User.wallet_privatekey);
     var EthereumTx = require('ethereumjs-tx');
-    var value = 0.0001;
+    var etherValue = 0.0001;
     if(coinAmount == 10){
         etherValue = 0.001;
     }
@@ -545,7 +554,6 @@ function try2sendAndAddCoin(User,res,coinAmount) {
     if(coinAmount == 1000){
         etherValue = 0.1;
     }
-
     //transaction
     web3.eth.getTransactionCount(fromAddress).then(txCount => {
         console.log("nonce:" + txCount);
@@ -554,7 +562,7 @@ function try2sendAndAddCoin(User,res,coinAmount) {
             gasPrice: web3.utils.toHex(web3.utils.toWei('0.00000009', 'ether')),
             gasLimit: web3.utils.toHex(30000),
             to: toAddress,
-            value: web3.utils.numberToHex(web3.utils.toWei(etherValue, 'ether')),
+            value: web3.utils.numberToHex(web3.utils.toWei('' + etherValue + '', 'ether')),
             data: web3.utils.asciiToHex('etherplanets'),
             //chainId: 1
         }
@@ -568,13 +576,6 @@ function try2sendAndAddCoin(User,res,coinAmount) {
                 return;
             }
             console.log('sent', result)
-            /*
-            console.log('sent', result)
-            res.json({ 
-                status:"ok",
-                message: ""
-            });
-            */
             User.coin_amount = Number(User.coin_amount) + Number(coinAmount);
             User.save(function(err) {
                 if (err){

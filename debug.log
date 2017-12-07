@@ -1,0 +1,16 @@
+error
+61429848
+A balance:0ether
+ok
+{ __v: 0,
+  _id: 5a275b142f5e9ee504a78e4f,
+  coin_amount: 0,
+  email: '',
+  name: 'aaa',
+  password: '',
+  score: 0,
+  screen_name: 'aaa',
+  twitter_user_id: 61429848,
+  wallet_address: '0xb34E7540EE23352f62EeB08FA42e1450b7b268Bb',
+  wallet_balance: 0,
+  wallet_privatekey: '0xbbbd4bba0bc34b1c3f69bae665a2791bf37942c75f339de38453c81b0c517bbd' }

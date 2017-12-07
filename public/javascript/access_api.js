@@ -1,4 +1,5 @@
 window.onload = function () {
+  $.LoadingOverlay("show");
   var formData = new FormData();
   var xhr = new XMLHttpRequest();
   //xhr.timeout=1000;
@@ -22,6 +23,7 @@ window.onload = function () {
       console.log('interactive... ' + xhr.responseText.length + ' bytes.');
       break;
     case 4: // データ受信完了.
+      $.LoadingOverlay("hide");
       if (xhr.status == 200 || xhr.status == 304) {
         var data = xhr.responseText; // responseXML もあり
         console.log('COMPLETE! :' + data);
@@ -32,11 +34,13 @@ window.onload = function () {
     }
   }
   xhr.onerror = function (e) {
+    $.LoadingOverlay("hide");
     console.log(xhr);
     console.error(xhr.statusText);
   };
   xhr.onload = function (e) {
     if (this.status == 200) {
+      $.LoadingOverlay("hide");
       var json = JSON.parse(this.responseText);
       //ログアウトしていたらログイン画面へ遷移
       if (json.status == "logout") {
@@ -83,7 +87,8 @@ function goToGameLayer() {
 }
 
 function OnButtonClick() {
-  console.log("buy");
+  //console.log("buy");
+  $.LoadingOverlay("show");
   var xhr = new XMLHttpRequest();
   //xhr.timeout=1000;
   var host = window.location.hostname;
@@ -106,6 +111,7 @@ function OnButtonClick() {
       console.log('interactive... ' + xhr.responseText.length + ' bytes.');
       break;
     case 4: // データ受信完了.
+      $.LoadingOverlay("hide");
       if (xhr.status == 200 || xhr.status == 304) {
         var data = xhr.responseText; // responseXML もあり
         console.log('COMPLETE! :' + data);
