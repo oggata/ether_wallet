@@ -404,7 +404,7 @@ app.get('/api/user/buy',function(req,res){
                 });
             }
             User = user[0];
-            try2sendAndAddCoin(User,res,amount);
+            buycoin(User,amount,res);
         }
     );
 });
@@ -669,7 +669,7 @@ function try2send(User,res) {
 }
 
 
-function try2sendAndAddCoin(User,res,coinAmount) {
+function buycoin(User,coinAmount,res) {
     console.log("try2send");
     var Web3 = require('web3');
     var web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
@@ -702,7 +702,7 @@ function try2sendAndAddCoin(User,res,coinAmount) {
         }
         sendSigned(txData, fromKey, function (err, result) {
             if (err) {
-                console.log('error', err)
+                console.log(err);
                 res.json({ 
                     status:"error",
                     message: err
