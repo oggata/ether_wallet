@@ -404,7 +404,7 @@ app.get('/api/user/buy',function(req,res){
                 });
             }
             User = user[0];
-            buycoin(User,coinAmount,res);
+            buycoin(User,_coinAmount,res);
         }
     );
 });
