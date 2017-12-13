@@ -86,14 +86,14 @@ function goToGameLayer() {
   }
 }
 
-function OnButtonClick() {
+function OnButtonClick(amount) {
   //console.log("buy");
   $.LoadingOverlay("show");
   var xhr = new XMLHttpRequest();
   //xhr.timeout=1000;
   var host = window.location.hostname;
   var port = window.location.port;
-  var url = "http://" + host + ":" + port + "/api/user/buy?amount=10";
+  var url = "http://" + host + ":" + port + "/api/user/buy?amount=" + amount;
   xhr.open('GET', url);
   xhr.onreadystatechange = function () {
     switch (xhr.readyState) {
