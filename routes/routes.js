@@ -14,18 +14,17 @@ console.log = function(d) {
 
 //curl 'http://localhost:3000/api/user/test' -XGET
 app.get('/api/user/test', function (req, res) {
-
-   //app.use(morgan({ stream: "aaa" }));
     if(req.session.passport.user) {
         console.log(req.session.passport.user.id);
     }else{
-        console.log("error");
+        console.log("failed get session");
         res.json({
             status:"logout",
             message:"failed get session"
         });
         return;
     }
+    console.log("ok");
     res.json({
         status:"ok",
         message:"This is user api"
@@ -96,9 +95,11 @@ app.get('/api/user/resetwallet',function(req,res){
             // 保存処理
             User.save(function(err) {
                 if (err){
+                    console.log(err);
                     // エラーがあった場合エラーメッセージを返す
                     res.send(err);
                 } else {
+                    console.log("ok");
                     // エラーがなければ「Success!!」
                     res.json({ 
                         status:"ok",
@@ -111,7 +112,6 @@ app.get('/api/user/resetwallet',function(req,res){
         }
     );
 });
-
 
 //curl 'http://localhost:3000/api/user/create?name=aaaa' -XGET
 app.get('/api/user/create',function(req,res){
@@ -153,6 +153,7 @@ app.get('/api/user/create',function(req,res){
                 User.name = req.query.name;
                 User.screen_name = req.query.name;
                 User.coin_amount = 0;
+                User.fuel_amount = 0;
                 User.email = "";
                 User.password = "";
                 User.score = 0;
@@ -163,6 +164,7 @@ app.get('/api/user/create',function(req,res){
                     if (err){
                         // エラーがあった場合エラーメッセージを返す
                         //res.send(err);
+                        console.log(err);
                         res.json({ 
                             status:"error",
                             message: err,
@@ -171,6 +173,7 @@ app.get('/api/user/create',function(req,res){
                         });
                     } else {
                         // エラーがなければ「Success!!」
+                        console.log("ok");
                         res.json({ 
                             status:"ok",
                             message: 'Success!!',
@@ -183,6 +186,127 @@ app.get('/api/user/create',function(req,res){
         }
     );
 });
+
+
+//curl 'http://localhost:3000/api/user/use_fuel?amount=10' -XGET
+app.get('/api/user/use_fuel',function(req,res){
+    console.log("pay");
+
+    if(req.session.passport.user) {
+        console.log(req.session.passport.user.id);
+    }else{
+        console.log("logout");
+        res.json({
+            status:"logout",
+            message:"failed get session"
+        });
+        return;
+    }
+
+    if(!req.query.amount){
+        res.json({ 
+            status:"error",
+            message: 'amount is null' 
+        });
+    }
+
+    var User = null;
+    var _amount = req.query.amount;
+    UserModel
+        .find({twitter_user_id:req.session.passport.user.id})
+        .then(function (user) {
+            if(user.length == 0){
+                res.json({ 
+                    status:"error",
+                    message: 'user not found' 
+                });
+            }
+            User = user[0]
+            if(_amount > 0){
+                if(User.fuel_amount <= _amount){
+                    res.json({ 
+                        status:"error",
+                        message: 'lack of fuel amount' 
+                    });
+                }
+            }
+            User.fuel_amount = Number(User.fuel_amount) - Number(_amount);
+            User.save(function(err) {
+                if (err){
+                    res.send(err);
+                } else {
+                    res.json({ 
+                        status:"ok",
+                        message: 'Success!', 
+                        user: User
+                    });
+                }
+            });
+        }
+    );
+});
+
+
+//curl 'http://localhost:3000/api/user/exc_coin_2_fuel?amount=1' -XGET
+app.get('/api/user/exc_coin_2_fuel',function(req,res){
+    //console.log("pay");
+
+    if(req.session.passport.user) {
+        console.log(req.session.passport.user.id);
+    }else{
+        console.log("logout");
+        res.json({
+            status:"logout",
+            message:"failed get session"
+        });
+        return;
+    }
+
+    if(!req.query.amount){
+        res.json({ 
+            status:"error",
+            message: 'amount is null' 
+        });
+    }
+
+    var User = null;
+    var _amount = req.query.amount;
+    UserModel
+        .find({twitter_user_id:req.session.passport.user.id})
+        .then(function (user) {
+            if(user.length == 0){
+                res.json({ 
+                    status:"error",
+                    message: 'user not found' 
+                });
+            }
+            User = user[0]
+            if(_amount > 0){
+                if(User.coin_amount <= _amount){
+                    res.json({ 
+                        status:"error",
+                        message: 'lack of coin amount' 
+                    });
+                }
+            }
+            User.coin_amount = Number(User.coin_amount) - Number(_amount);
+            User.fuel_amount = Number(User.fuel_amount) - Number(_amount) * 10;
+            User.save(function(err) {
+                if (err){
+                    console.log(err);
+                    res.send(err);
+                } else {
+                    res.json({ 
+                        status:"ok",
+                        message: 'Success!', 
+                        user: User
+                    });
+                }
+            });
+        }
+    );
+});
+
 
 //curl 'http://localhost:3000/api/user/pay?amount=10' -XGET
 app.get('/api/user/pay',function(req,res){
@@ -220,6 +344,7 @@ app.get('/api/user/pay',function(req,res){
             User = user[0]
             if(_amount > 0){
                 if(User.coin_amount <= _amount){
+                    console.log("lack of balance");
                     res.json({ 
                         status:"error",
                         message: 'lack of balance' 
@@ -229,6 +354,7 @@ app.get('/api/user/pay',function(req,res){
             User.coin_amount = Number(User.coin_amount) - Number(_amount);
             User.save(function(err) {
                 if (err){
+                    console.log(err);
                     res.send(err);
                 } else {
                     res.json({ 
@@ -258,6 +384,7 @@ app.get('/api/user/buy',function(req,res){
     }
 
     if(!req.query.amount){
+        console.log("amount is null");
         res.json({ 
             status:"error",
             message: 'amount is null' 
@@ -270,6 +397,7 @@ app.get('/api/user/buy',function(req,res){
         .find({twitter_user_id:req.session.passport.user.id})
         .then(function (user) {
             if(user.length == 0){
+                console.log("user not found");
                 res.json({ 
                     status:"error",
                     message: 'user not found' 
@@ -298,6 +426,7 @@ app.get('/api/user/sendeth',function(req,res){
     }
 
     if(!req.query.amount){
+        console.log("amount is null");
         res.json({ 
             status:"error",
             message: 'amount is null' 
@@ -309,6 +438,7 @@ app.get('/api/user/sendeth',function(req,res){
         .find({twitter_user_id:req.session.passport.user.id})
         .then(function (user) {
             if(user.length == 0){
+                console.log("user not found");
                 res.json({ 
                     status:"error",
                     message: 'user not found' 
@@ -335,6 +465,7 @@ app.get('/api/user/sendscore',function(req,res){
     }
 
     if(!req.query.score){
+        console.log("amount is null");
         res.json({ 
             status:"error",
             message: 'amount is null' 
@@ -347,6 +478,7 @@ app.get('/api/user/sendscore',function(req,res){
         .find({twitter_user_id:req.session.passport.user.id})
         .then(function (user) {
             if(user.length == 0){
+                console.log("user not found");
                 res.json({ 
                     status:"error",
                     message: 'user not found' 
@@ -359,6 +491,7 @@ app.get('/api/user/sendscore',function(req,res){
                     if (err){
                         res.send(err);
                     } else {
+                        console.log("ok");
                         res.json({ 
                             status:"ok",
                             message: 'Success! new record'
@@ -367,6 +500,7 @@ app.get('/api/user/sendscore',function(req,res){
                 });
 
             }else{
+                console.log("ok");
                 res.json({ 
                     status:"ok",
                     message: 'records do not update' 
@@ -518,7 +652,7 @@ function try2send(User,res) {
         }
         sendSigned(txData, fromKey, function (err, result) {
             if (err) {
-                console.log('error', err)
+                console.log(err);
                 res.json({ 
                     status:"error",
                     message: err
@@ -579,12 +713,14 @@ function try2sendAndAddCoin(User,res,coinAmount) {
             User.coin_amount = Number(User.coin_amount) + Number(coinAmount);
             User.save(function(err) {
                 if (err){
+                    console.log(err);
                     //res.send(err);
                     res.json({ 
                         status:"error",
                         message: ""
                     });
                 } else {
+                    console.log("ok");
                     res.json({ 
                         status:"ok",
                         message: 'Success!', 

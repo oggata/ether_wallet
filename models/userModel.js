@@ -6,6 +6,7 @@ var UserSchema   = new Schema({
     name :String,
     screen_name: String,
     coin_amount: Number,
+    fuel_amount : Number,
     email : String,
     password : String,
     score: Number,
