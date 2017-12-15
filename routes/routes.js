@@ -7,29 +7,14 @@ var util = require('util');
 var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
+
+var routesIndex = require('./test.js')
+app.get('/api/user/test',routesIndex.test);
+
 console.log = function(d) {
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
 };
-
-//curl 'http://localhost:3000/api/user/test' -XGET
-app.get('/api/user/test', function (req, res) {
-    if(req.session.passport.user) {
-        console.log(req.session.passport.user.id);
-    }else{
-        console.log("failed get session");
-        res.json({
-            status:"logout",
-            message:"failed get session"
-        });
-        return;
-    }
-    console.log("ok");
-    res.json({
-        status:"ok",
-        message:"This is user api"
-    });
-});
 
 //curl 'http://localhost:3000/api/me' -XGET
 app.get('/api/user/me', function (req, res){
@@ -57,6 +42,41 @@ app.get('/api/user/me', function (req, res){
             var _balance = loadBalance(user[0].wallet_address,user,res);
         }
     );
+});
+
+//curl 'http://localhost:3000/api/list/score_ranking' -XGET
+app.get('/api/list/score_ranking', function (req, res){
+    /*
+    if(req.session.passport.user) {
+        console.log(req.session.passport.user.id);
+    }else{
+        console.log("error");
+        res.json({
+            status:"logout",
+            message:"failed get session"
+        });
+        return;
+    }
+    */
+    var query = {};
+    UserModel.find(query,{},{sort:{score: -1},limit:100}, function(err, data){
+        if(err){
+            console.log(err);
+        }
+        var _users = [];
+        for (var i = 0; i < data.length; i++) {
+            var obj = new Object();
+            obj.name = data[i]['name'];
+            obj.score = data[i]['score'];
+            obj.twitter_user_id = data[i]['twitter_user_id'];
+            _users.push(obj);
+        }
+        res.json({
+            status:"ok",
+            list:{_users}
+        });
+    });
+
 });
 
 //curl 'http://localhost:3000/api/user/reset' -XGET
@@ -367,7 +387,6 @@ app.get('/api/user/pay',function(req,res){
         }
     );
 });
-
 
 //curl 'http://localhost:3000/api/user/buy?amount=10' -XGET
 app.get('/api/user/buy',function(req,res){

@@ -12,7 +12,11 @@ var UserSchema   = new Schema({
     score: Number,
     wallet_address : String,
     wallet_privatekey : String,
-    wallet_balance : Number
+    wallet_balance : Number,
+    ship_status : String,
+    ship_dx : Number,
+    ship_dy : Number,
+    ship_target_time : Number,
 });
 
 // スキーマをモデルとしてコンパイルし、それをモジュールとして扱えるようにする
