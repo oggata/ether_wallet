@@ -116,7 +116,7 @@ function OnButtonClick(amount) {
         var data = xhr.responseText; // responseXML もあり
         console.log('COMPLETE! :' + data);
         var json = JSON.parse(data);
-        alert(json.status);
+        alert(json.message);
         if (json.status == "logout") {
           location.href = '/login';
           return;

@@ -103,7 +103,7 @@ app.get('/api/user/resetwallet',function(req,res){
                     // エラーがなければ「Success!!」
                     res.json({ 
                         status:"ok",
-                        message: 'Success!!',
+                        message: 'Processing is completed',
                         wallet_address: WD.address,
                         wallet_mnemonic : WD.mnemonic
                     });
